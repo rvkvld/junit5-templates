@@ -11,7 +11,7 @@
     <modules>
         <module>junit3</module>
         <module>junit4</module>
-        <module>junit4-cucumber</module>
+<!--        <module>junit4-cucumber</module>-->
         <module>junit4-mockito</module>
         <module>junit4-spring</module>
         <module>junit4-spring-boot</module>
