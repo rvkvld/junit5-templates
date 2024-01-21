@@ -1,0 +1,26 @@
+repositories {
+    mavenCentral()
+}
+
+ext {
+	junitPlatformVersion = '1.10.1'
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+
+jar {
+    archiveBaseName = 'junit5-engine-spi'
+    archiveVersion = '1.0.0'
+}
+
+compileTestJava {
+    sourceCompatibility = 17
+    targetCompatibility = 17
+    options.compilerArgs += '-parameters'
+}
+
+dependencies {
+	implementation("org.junit.platform:junit-platform-engine:${junitPlatformVersion}")
+}

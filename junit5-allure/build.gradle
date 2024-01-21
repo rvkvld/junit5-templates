@@ -1,0 +1,57 @@
+buildscript {
+    ext {
+        allureGradleVersion = '2.11.2'
+    }
+    repositories {
+        maven {
+          url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath "io.qameta.allure:io.qameta.allure.gradle.plugin:${allureGradleVersion}"
+    }
+}
+
+repositories {
+    mavenCentral()
+    maven {
+        url "https://plugins.gradle.org/m2/"
+    }
+}
+
+ext {
+    junitJupiterVersion = '5.10.1'
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'io.qameta.allure'
+
+allure {
+    version = '2.16.1'
+}
+
+jar {
+    archiveBaseName = 'junit5-allure'
+    archiveVersion = '1.0.0'
+}
+
+test {
+    useJUnitPlatform()
+
+    testLogging {
+        events "passed", "skipped", "failed"
+        showStandardStreams = true
+    }
+}
+
+compileTestJava {
+    sourceCompatibility = 17
+    targetCompatibility = 17
+    options.compilerArgs += '-parameters'
+}
+
+dependencies {
+    testImplementation("org.junit.jupiter:junit-jupiter:${junitJupiterVersion}")
+}

@@ -1,0 +1,37 @@
+repositories {
+    mavenCentral()
+}
+
+ext {
+    junitJupiterVersion = '5.10.1'
+    restAssuredVersion  = '5.3.2'
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+
+jar {
+    archiveBaseName = 'junit5-rest-assured'
+    archiveVersion = '1.0.0'
+}
+
+test {
+    useJUnitPlatform()
+
+    testLogging {
+        events "passed", "skipped", "failed"
+        showStandardStreams = true
+    }
+}
+
+compileTestJava {
+    sourceCompatibility = 17
+    targetCompatibility = 17
+    options.compilerArgs += '-parameters'
+}
+
+dependencies {
+    testImplementation("org.junit.jupiter:junit-jupiter:${junitJupiterVersion}")
+    testImplementation("io.rest-assured:rest-assured:${restAssuredVersion}")
+}

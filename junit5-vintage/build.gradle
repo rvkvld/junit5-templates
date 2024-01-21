@@ -1,0 +1,40 @@
+repositories {
+    mavenCentral()
+}
+
+ext {
+    slf4jVersion  = '2.0.9'
+    logbackVersion  = '1.4.11'
+
+    junitVintageVersion  = '5.10.1'
+
+    junitLegacyVersion  = '4.13.2'
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+
+jar {
+    archiveBaseName = 'junit5-vintage'
+    archiveVersion = '1.0.0'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+compileTestJava {
+    sourceCompatibility = 17
+    targetCompatibility = 17
+    options.compilerArgs += '-parameters'
+}
+
+dependencies {
+    implementation("org.slf4j:slf4j-api:${slf4jVersion}")
+    implementation("ch.qos.logback:logback-classic:${logbackVersion}")
+
+    testImplementation("junit:junit:${junitLegacyVersion}")
+
+    testRuntimeOnly("org.junit.vintage:junit-vintage-engine:${junitVintageVersion}")
+}
